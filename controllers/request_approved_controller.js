@@ -2,13 +2,13 @@ BookUser = require('../model/book_user');
 
 module.exports = (req, res, next) => {
   const id = req.body.id;
-  const index = req.body.index;
+  const index = req.body.index;console.log('id',id, 'index',index);
 
   BookUser.findById(id, (err, user) => {
     if(err){
       console.error('there was an error finding the user in the DB');
       throw err;
-    }
+    }//stuff
 
     const userBook = user.booksAwaitingMe[index];
     const requesterBook = user.booksAwaitingMe[index];//create same book obj
@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
       if(err){
         console.error('there was an error finding the requester');
         throw err;
-      }
+      }console.log('requester',requester);
 
       requester.booksAwaitingOwner.forEach((elem,i) => {
         if(bookTitle === elem.title && id === elem.owner){
